@@ -229,42 +229,44 @@ function App() {
 
       <div className='container'>
         <Note></Note>
-        <table className='w-100'>
-          <thead>
-            <tr className='w-100'>
-              <th className='w-10'>削除</th>
-              <th className='w-10'>データ型</th>
-              <th className='w-10'>ラベル</th>
-              <th className='w-10'>API名</th>
-              <th className='w-10'>文字数(桁数)</th>
-              <th className='w-10'>行数</th>
-              <th className='w-10'>小数点</th>
-            </tr>
-          </thead>
-          <tbody>
-          {
-            rowList.map((row) => (
+        <div className='table-container'>
+          <table className='w-900px'>
+            <thead>
               <tr>
-                <td><button className="delete-button" onClick={() => onClickDelete(row.Id)}>削除</button></td>
-                <td>
-                  <select className='select' onChange={(e) => onChangeType(row.Id, e)} defaultValue={row.Type}>
-                    {
-                      typeDefinition.map((type) => (
-                        <option value={type.value}>{type.label}</option>
-                      ))
-                    }
-                  </select>
-                </td>
-                <td><input type="text" className='no-border' value={row.Label} onChange={(e)=> onChangeLabel(row.Id, e)} /></td>
-                <td><input type="text" className='no-border' value={row.APIName} onChange={(e)=> onChangeAPIName(row.Id, e)} /></td>
-                <td><input type="number" min="0" className='no-border' value={row.Length} onChange={(e) => onChangeLength(row.Id, e)} /></td>
-                <td className={row.Disabled.RowLength}><input type="number" min="0" className='no-border' value={row.RowCount} disabled={row.Disabled.RowLength} onChange={(e) => onChangeRowCount(row.Id, e)} /></td>
-                <td className={row.Disabled.Scale}><input type="number" min="0" className="no-border" value={row.Scale} disabled={row.Disabled.Scale} onChange={(e) => onChangeScale(row.Id, e)} /></td>
+                <th className='w-50px'>削除</th>
+                <th className="w-150px">データ型</th>
+                <th className='w-150px'>ラベル</th>
+                <th className='w-150px'>API名</th>
+                <th className='w-50px'>文字数(桁数)</th>
+                <th className='w-50px'>行数</th>
+                <th className='w-50px'>小数点</th>
               </tr>
-            ))
-          }
-          </tbody>
-        </table> 
+            </thead>
+            <tbody>
+            {
+              rowList.map((row) => (
+                <tr>
+                  <td><button className="delete-button" onClick={() => onClickDelete(row.Id)}>削除</button></td>
+                  <td>
+                    <select className='select' onChange={(e) => onChangeType(row.Id, e)} defaultValue={row.Type}>
+                      {
+                        typeDefinition.map((type) => (
+                          <option value={type.value}>{type.label}</option>
+                        ))
+                      }
+                    </select>
+                  </td>
+                  <td><input type="text" className='no-border' value={row.Label} onChange={(e)=> onChangeLabel(row.Id, e)} /></td>
+                  <td><input type="text" className='no-border' value={row.APIName} onChange={(e)=> onChangeAPIName(row.Id, e)} /></td>
+                  <td><input type="number" min="0" className='no-border' value={row.Length} onChange={(e) => onChangeLength(row.Id, e)} /></td>
+                  <td className={row.Disabled.RowLength}><input type="number" min="0" className='no-border' value={row.RowCount} disabled={row.Disabled.RowLength} onChange={(e) => onChangeRowCount(row.Id, e)} /></td>
+                  <td className={row.Disabled.Scale}><input type="number" min="0" className="no-border" value={row.Scale} disabled={row.Disabled.Scale} onChange={(e) => onChangeScale(row.Id, e)} /></td>
+                </tr>
+              ))
+            }
+            </tbody>
+          </table> 
+        </div>
         <p className="addButton" onClick={() => onClickAddRow()}>+</p>
         <p className="generateButton" onClick={() => onClickGenerate()}>xml作成</p>
       </div>

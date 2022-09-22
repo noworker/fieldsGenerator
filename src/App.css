@@ -8,6 +8,11 @@ html {
   max-width: 1000px;
 }
 
+.table-container {
+  width: 100%;
+  overflow-x: scroll;
+}
+
 h1,h2,h3,h4,h5,h6,p {
   padding: 0;
   margin: 0;
@@ -15,6 +20,7 @@ h1,h2,h3,h4,h5,h6,p {
 
 input {
   font-size: 100%;
+  width: 95%;
 }
 
 input[type="text"] {
@@ -98,16 +104,24 @@ td {
   background-color: blueviolet;
 }
 
-.w-10 {
-  width: 10%;
+.w-50px {
+  width: 50px;
 }
 
-.w-25 {
-  width: 25%;
+.w-80px {
+  width: 80px;
 }
 
-.w-100 {
-  width: 100%;
+.w-150px {
+  width: 150px;
+}
+
+.w-250px {
+  width: 250px;
+}
+
+.w-900px {
+  width: 900px
 }
 
 .disabled {
