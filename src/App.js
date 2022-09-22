@@ -2,11 +2,11 @@ import { useState } from 'react';
 import './App.css';
 import fileDownload from 'js-file-download';
 import Header from './component/header/header.tsx';
+import Note from './component/note/note.tsx';
 
 function App() {
 
   const [count, setCount] = useState(3);
-  const [generatedText, setGeneratedText] = useState("");
 
   const typeDefinition = [
     {
@@ -228,6 +228,7 @@ function App() {
       <Header name={"kawano"} age={24}></Header>
 
       <div className='container'>
+        <Note></Note>
         <table className='w-100'>
           <thead>
             <tr className='w-100'>
