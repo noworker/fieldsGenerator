@@ -1,21 +1,25 @@
-import { isDisabled } from '@testing-library/user-event/dist/utils';
 import { useState } from 'react';
 import './App.css';
 import fileDownload from 'js-file-download';
+import Header from './component/header.tsx';
 
 function App() {
 
   const [count, setCount] = useState(3);
   const [generatedText, setGeneratedText] = useState("");
 
-  const typeComboList = [
+  const typeDefinition = [
     {
       value: "Text",
-      label: "テキスト"
+      label: "テキスト",
     },
     {
       value: "LongTextArea",
       label: "ロングテキストエリア"
+    },
+    {
+      value: "Number",
+      label: "数値"
     }
   ];
 
@@ -27,7 +31,11 @@ function App() {
       APIName: "",
       Length: 0,
       RowCount: 0,
-      Disabled: "disabled"
+      Scale: 0,
+      Disabled: {
+        RowLength: "disabled",
+        Scale: "disabled",
+      }
     },
     {
       Id: 2,
@@ -36,7 +44,11 @@ function App() {
       APIName: "",
       Length: 0, 
       RowCount: 0,
-      Disabled: ""
+      Scale: 0,
+      Disabled: {
+        RowLength: "",
+        Scale: "disabled",
+      } 
     }
   ]);
 
@@ -48,15 +60,20 @@ function App() {
       APIName: "",
       Length: 0,
       RowCount: 0,
-      Disabled: "disabled"
+      Scale: 0,
+      Disabled: {
+        RowLength: "disabled",
+        Scale: "disabled"
+      } 
     }
+    console.log(newRow);
     setRowList([...rowList, newRow]);
-    console.log(count);
     setCount(count + 1);
   }
 
   const onClickGenerate = () => {
     let generatedText = [];
+    console.log(rowList);
     for(let row of rowList) {
       if(row.Type == "Text") {
         generatedText.push("<fields>\n");
@@ -81,31 +98,59 @@ function App() {
         generatedText.push(`\t<unique>false</unique>\n`)
         generatedText.push(`\t<visibleLines>${row.RowCount}</visibleLines>\n`)
         generatedText.push(`</fields>\n`)
+      } else if(row.Type == "Number") {
+        generatedText.push("<fields>\n")
+        generatedText.push(`\t<fullName></fullName>\n`)
+        generatedText.push(`\t<externalId>false</externalId>\n`)
+        generatedText.push(`\t<label>${row.Label}</label>\n`)
+        generatedText.push(`\t<precision>${row.Length}</precision>\n`)
+        generatedText.push(`\t<scale>${row.Scale}</scale>\n`)
+        generatedText.push(`\t<required>false</required>\n`)
+        generatedText.push(`\t<trackTrending>false</trackTrending>\n`)
+        generatedText.push(`\t<type>Number</type>\n`)
+        generatedText.push(`\t<unique>false</unique>\n`)
+        generatedText.push("</fields>\n")
       }
-      let text = generatedText.join("");
-      console.log(text);
-
-      let blob = new Blob([text], {"type": "text/plain"});
-      fileDownload(blob, 'fields.txt');
     }
+    let text = generatedText.join("");
+    console.log(text);
+
+    let blob = new Blob([text], {"type": "text/plain"});
+    fileDownload(blob, 'fields.txt');
   }
 
   const onChangeType = (id, e) => {
-    console.log("onChangeType");
-    console.log(e.target.value);
+    setRowList(
+      rowList.map(row => {
+        if(row.Id === id) {
+          row.Type = e.target.value;
+        }
+        return row;
+      })
+    )
 
+    setDisable();
+  }
+
+  const setDisable = () => {
     setRowList(
       rowList.map((row) => {
-        if(row.Id === id) {
-          row.Type = e.target.value; 
-          if(row.Type == "LongTextArea") {
-            row.Disabled = "";
+        switch(row.Type) {
+          case "Text":
+            row.Disabled.RowLength = "disabled";
+            row.Disabled.Scale = "disabled"
             row.RowCount = 0;
-          } else if(row.Type == "Text") {
-            row.Disabled = "disabled";
-            row.RowCount = 0 
-          }
-        }
+            break;
+          case "LongTextArea":
+            row.Disabled.RowLength = "";
+            row.Disabled.Scale = "disabled";
+            row.RowCount = 0;
+            break;
+          case "Number":
+            row.Disabled.RowLength = "disabled";
+            row.Disabled.Scale = "";
+            break;
+        } 
         return row;
       })
     )
@@ -155,21 +200,32 @@ function App() {
     )
   }
 
+  const onChangeScale = (id, e) => {
+    setRowList(
+      rowList.map((row) => {
+        if(row.Id === id) {
+          row.Scale = e.target.value;
+        }
+        return row;
+      })
+    )
+  }
+
 
   return (
     <>
-      <header>
-        FieldsGenerator
-      </header>
+      <Header name={"kawano"} age={24}></Header>
+
       <div className='container'>
         <table className='w-100'>
           <thead>
             <tr className='w-100'>
-              <th className='w-25'>データ型</th>
-              <th className='w-25'>ラベル</th>
-              <th className='w-25'>API名</th>
-              <th className='w-10'>文字数</th>
+              <th className='w-10'>データ型</th>
+              <th className='w-10'>ラベル</th>
+              <th className='w-10'>API名</th>
+              <th className='w-10'>文字数(桁数)</th>
               <th className='w-10'>行数</th>
+              <th className='w-10'>小数点</th>
             </tr>
           </thead>
           <tbody>
@@ -179,7 +235,7 @@ function App() {
                 <td>
                   <select className='select' onChange={(e) => onChangeType(row.Id, e)} defaultValue={row.Type}>
                     {
-                      typeComboList.map((type) => (
+                      typeDefinition.map((type) => (
                         <option value={type.value}>{type.label}</option>
                       ))
                     }
@@ -187,8 +243,9 @@ function App() {
                 </td>
                 <td><input type="text" className='no-border' value={row.Label} onChange={(e)=> onChangeLabel(row.Id, e)} /></td>
                 <td><input type="text" className='no-border' value={row.APIName} onChange={(e)=> onChangeAPIName(row.Id, e)} /></td>
-                <td><input type="number" min="0" className='no-border' value={row.Length}onChange={(e) => onChangeLength(row.Id, e)} /></td>
-                <td className={row.Disabled}><input type="number" min="0" className='no-border' value={row.RowCount} disabled={row.Disabled} onChange={(e) => onChangeRowCount(row.Id, e)} /></td>
+                <td><input type="number" min="0" className='no-border' value={row.Length} onChange={(e) => onChangeLength(row.Id, e)} /></td>
+                <td className={row.Disabled.RowLength}><input type="number" min="0" className='no-border' value={row.RowCount} disabled={row.Disabled.RowLength} onChange={(e) => onChangeRowCount(row.Id, e)} /></td>
+                <td className={row.Disabled.Scale}><input type="number" min="0" className="no-border" value={row.Scale} disabled={row.Disabled.Scale} onChange={(e) => onChangeScale(row.Id, e)} /></td>
               </tr>
             ))
           }

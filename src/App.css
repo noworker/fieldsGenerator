@@ -1,5 +1,5 @@
 html {
-  font-size: 15px;
+  font-size: 8px;
 }
 
 .container {
@@ -11,6 +11,20 @@ html {
 h1,h2,h3,h4,h5,h6,p {
   padding: 0;
   margin: 0;
+}
+
+input {
+  font-size: 100%;
+}
+
+input[type="text"] {
+  width: 95%;
+  white-space: normal;
+}
+
+select {
+  font-size: 100%;
+  width: 100%;
 }
 
 header {
@@ -26,6 +40,7 @@ table, th, td{
   border-collapse: collapse;
   border-spacing: 0;
 }
+
 
 th {
   background-color: skyblue;
@@ -45,7 +60,6 @@ td {
 
 .no-border {
   border: none;
-  width: 90%;
   background-color: transparent;
 }
 
@@ -59,11 +73,12 @@ td {
   height: 50px;
   background-color: green;
   text-align: center;
-  line-height: 50px;
+  line-height: 45px;
   font-weight: bold;
   font-size: 150%;
   border-radius: 50%;
   color: white;
+  font-size: 400%;
   cursor: pointer;
 }
 
