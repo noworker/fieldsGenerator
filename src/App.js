@@ -23,6 +23,7 @@ function App() {
     }
   ];
 
+  const [optionState, setOptionState] = useState("");
   const [rowList, setRowList] = useState([
     {
       Id: 1,
@@ -120,6 +121,7 @@ function App() {
   }
 
   const onClickDelete = (id) => {
+    console.log(id);
     setRowList(
       rowList.filter((row) => {
         return row.Id != id
@@ -248,10 +250,10 @@ function App() {
                 <tr>
                   <td><button className="delete-button" onClick={() => onClickDelete(row.Id)}>削除</button></td>
                   <td>
-                    <select className='select' onChange={(e) => onChangeType(row.Id, e)} defaultValue={row.Type}>
+                    <select className='select' onChange={(e) => onChangeType(row.Id, e)}>
                       {
                         typeDefinition.map((type) => (
-                          <option value={type.value}>{type.label}</option>
+                          <option value={type.value} selected={type.value == row.Type} >{type.label}</option>
                         ))
                       }
                     </select>
