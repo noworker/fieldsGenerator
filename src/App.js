@@ -7,6 +7,7 @@ import Note from './component/note/note.tsx';
 function App() {
 
   const [count, setCount] = useState(3);
+  const [addNumber, setAddNumber] = useState(1);
 
   const typeDefinition = [
     {
@@ -54,23 +55,29 @@ function App() {
   ]);
 
   const onClickAddRow = () => {
-    let newRow = {
-      Id: count,
-      Type: "Text",
-      Label: "",
-      APIName: "",
-      Length: 0,
-      RowCount: 0,
-      Scale: 0,
-      Disabled: {
-        RowLength: "disabled",
-        Scale: "disabled"
-      } 
+    let newRows = [];
+    let newCount = count;
+    for(let i=0; i < addNumber; i++) {
+      let newRow = {
+        Id: newCount,
+        Type: "Text",
+        Label: "",
+        APIName: "",
+        Length: 0,
+        RowCount: 0,
+        Scale: 0,
+        Disabled: {
+          RowLength: "disabled",
+          Scale: "disabled"
+        } 
+      }
+      newRows.push(newRow);
+      newCount ++;
     }
-    console.log(newRow);
-    setRowList([...rowList, newRow]);
-    setCount(count + 1);
+    setRowList([...rowList, ...newRows]);
+    setCount(newCount);
   }
+  
 
   const onClickGenerate = () => {
     let generatedText = [];
@@ -224,6 +231,11 @@ function App() {
     )
   }
 
+  const onChangeAddNumber = (e) => {
+    setAddNumber(e.target.value);
+    console.log(addNumber)
+  }
+
 
   return (
     <>
@@ -269,7 +281,11 @@ function App() {
             </tbody>
           </table> 
         </div>
-        <p className="addButton" onClick={() => onClickAddRow()}>+</p>
+        <div className='flex-container'>
+          <input type="number" min="0" className='row-number' value={addNumber} onChange={(e) => onChangeAddNumber(e)} />行追加する
+          <p className='kakeru'>×</p>
+          <p className="addButton" onClick={() => onClickAddRow()}>+</p>
+        </div>
         <p className="generateButton" onClick={() => onClickGenerate()}>xml作成</p>
       </div>
     </>

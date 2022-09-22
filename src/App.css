@@ -74,7 +74,6 @@ td {
 }
 
 .addButton {
-  margin: 20px auto;
   width: 50px;
   height: 50px;
   background-color: green;
@@ -136,4 +135,23 @@ td {
   height: 100%;
   cursor: pointer;
   user-select: none;
+}
+
+.flex-container {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  width: 100%;
+  align-items: center;
+}
+
+.row-number {
+  width: 50px;
+  height: 50px;
+  font-size: 200%;
+  text-align: center;
+}
+
+.kakeru {
+  font-size: 200%;
 }
