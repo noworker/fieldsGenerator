@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import './App.css';
 import fileDownload from 'js-file-download';
-import Header from './component/header.tsx';
+import Header from './component/header/header.tsx';
 
 function App() {
 
@@ -119,6 +119,14 @@ function App() {
     fileDownload(blob, 'fields.txt');
   }
 
+  const onClickDelete = (id) => {
+    setRowList(
+      rowList.filter((row) => {
+        return row.Id != id
+      })
+    )
+  }
+
   const onChangeType = (id, e) => {
     setRowList(
       rowList.map(row => {
@@ -149,6 +157,9 @@ function App() {
           case "Number":
             row.Disabled.RowLength = "disabled";
             row.Disabled.Scale = "";
+            break;
+          default:
+            console.log('そのデータ型は開発中です')
             break;
         } 
         return row;
@@ -220,6 +231,7 @@ function App() {
         <table className='w-100'>
           <thead>
             <tr className='w-100'>
+              <th className='w-10'>削除</th>
               <th className='w-10'>データ型</th>
               <th className='w-10'>ラベル</th>
               <th className='w-10'>API名</th>
@@ -232,6 +244,7 @@ function App() {
           {
             rowList.map((row) => (
               <tr>
+                <td><button className="delete-button" onClick={() => onClickDelete(row.Id)}>削除</button></td>
                 <td>
                   <select className='select' onChange={(e) => onChangeType(row.Id, e)} defaultValue={row.Type}>
                     {

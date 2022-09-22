@@ -1,4 +1,5 @@
 import React, { useMemo } from "react"
+import './header.css'
 
 type HeaderProps = {
     name: string;
@@ -8,7 +9,7 @@ type HeaderProps = {
 const Header: React.FC = () =>{
     return useMemo(() => {
         return (
-            <header>
+            <header className="">
                 FieldsGenerator
             </header>
         )
