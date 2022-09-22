@@ -5,7 +5,9 @@ const Header: React.FC = () =>{
     return useMemo(() => {
         return (
             <header className="">
-                FieldsGenerator
+                <div className="header-container">
+                  FieldsGenerator
+                </div>
             </header>
         )
     },[])
