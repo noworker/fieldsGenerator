@@ -1,0 +1,30 @@
+{
+    "header": {
+        "title": "フィールドジェネレーター"
+    },
+    "language-area": {
+        "sent": "下のボタンから言語を変更できます"
+    },
+    "note": {
+        "title": "ノート",
+        "content": "salesforceのオブジェクトの項目定義XMLファイルを出力することができるアプリです。<br/>ご意見感想は twitter: @sayonaraNoStepまでお願いします。<br/>プルリクエストはこちらまでgithub.com/noworker/fieldsGenerator"
+    },
+    "table": {
+        "deleteButton" : "削除",
+        "dataType": "データ型",
+        "Label": "ラベル",
+        "APIName": "API名",
+        "Length": "文字列(桁数)",
+        "RowCount": "行数",
+        "Scale": "小数点"
+    },
+    "rowAdd": "行追加する",
+    "buttons": {
+        "createXML": "xmlを生成する"
+    },   
+    "options": {
+        "Text": "テキスト",
+        "LongTextArea": "ロングテキストエリア",
+        "Number": "数値"
+    }
+}

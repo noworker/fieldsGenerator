@@ -1,0 +1,30 @@
+{
+    "header": {
+        "title": "Fields Generator"
+    },
+    "language-area": {
+        "sent": "you can switch launguage below."
+    },
+    "note": {
+        "title": "Note",
+        "content": "the app can generate Item Definition file for Salesforce developer.<br/>github.com/noworker/fieldsGenerator<br/>twitter.com/sayonaraNoStep'"
+    },
+    "table": {
+        "deleteButton" : "delete",
+        "dataType": "DataType",
+        "Label": "Label",
+        "APIName": "APIName",
+        "Length": "Length",
+        "RowCount": "Row",
+        "Scale": "Scale"
+    },
+    "rowAdd": "Row Add",
+    "buttons": {
+        "createXML": "Generate XML file"
+    },
+    "options": {
+        "Text": "Text",
+        "LongTextArea": "LongTextArea",
+        "Number": "Number"
+    }
+}

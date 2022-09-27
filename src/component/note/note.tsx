@@ -1,20 +1,20 @@
+import { Trans } from 'react-i18next'
 import React, { useMemo } from "react"
+import { useTranslation } from "react-i18next"
 import './note.css'
 
 const Note: React.FC = () => {
+    const {t} = useTranslation();
     return useMemo(() => {
         return (
             <>
                 <div className="note-frame">
-                   <h3>・ノート</h3>
-                   <p>salesforceのオブジェクトの項目定義XMLファイルを出力することができるアプリです。
-                    <br/>ご意見感想は twitter: <a href="https://twitter.com/sayonaraNoStep">@sayonaraNoStep</a>までお願いします。<br/>
-                プルリクエストはこちらまで　<a href="https://github.com/noworker/fieldsGenerator">github.com/noworker/fieldsGenerator</a>
-                   </p>
+                   <h3>・{t("note.title")}</h3>
+                   <p><Trans i18nKey="multiline">{t("note.content")}</Trans></p>
                 </div>
             </>
         )
-    },[])
+    },[t])
 }
 
 export default Note;
