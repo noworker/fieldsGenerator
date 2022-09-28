@@ -5,6 +5,11 @@
 .lng-container {
     display: flex;
     gap: 10px;
+    justify-content: end;
+}
+
+.lng-sent {
+    text-align: right;
 }
 
 .lngButton {

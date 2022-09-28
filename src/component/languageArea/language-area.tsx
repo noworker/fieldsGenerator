@@ -1,11 +1,14 @@
 import React, { useReducer } from "react";
 import { useTranslation } from "react-i18next";
-import i18n from "../../i18n/config.ts";
+import i18n from "../../i18n/config";
 import "./language-area.scss";
 
 const LanguageArea: React.FC = () => {
   const { t } = useTranslation();
-  const reducerChangeLang = (state, action) => {
+  type ACTIONTYPE = {
+    type: string
+  }
+  const reducerChangeLang = (state: string, action: ACTIONTYPE) => {
     switch (action.type) {
       case "CHANGE_JA":
         i18n.changeLanguage("ja");
@@ -22,7 +25,7 @@ const LanguageArea: React.FC = () => {
   return (
     <>
       <div className="container">
-        <p>{t("language-area.sent")}</p>
+        <p className="lng-sent">{t("language-area.sent")}</p>
         <div className="lng-container">
           <button
             className="lngButton bg-blue"

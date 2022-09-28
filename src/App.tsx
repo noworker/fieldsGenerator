@@ -1,9 +1,9 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import "./App.css";
 import fileDownload from "js-file-download";
-import Header from "./component/header/header.tsx";
-import Note from "./component/note/note.tsx";
-import LanguageArea from "./component/languageArea/language-area.tsx";
+import Header from "./component/header/header";
+import Note from "./component/note/note";
+import LanguageArea from "./component/languageArea/language-area";
 import { useTranslation } from "react-i18next";
 
 function App() {
@@ -36,8 +36,8 @@ function App() {
       RowCount: 0,
       Scale: 0,
       Disabled: {
-        RowLength: "disabled",
-        Scale: "disabled",
+        RowLength: true,
+        Scale: true,
       },
     },
     {
@@ -49,8 +49,8 @@ function App() {
       RowCount: 0,
       Scale: 0,
       Disabled: {
-        RowLength: "",
-        Scale: "disabled",
+        RowLength: true,
+        Scale: true,
       },
     },
   ]);
@@ -59,7 +59,7 @@ function App() {
     let newRows = [];
     let newCount = count;
     for (let i = 0; i < addNumber; i++) {
-      let newRow = {
+      let newRow : Rows= {
         Id: newCount,
         Type: "Text",
         Label: "",
@@ -68,8 +68,8 @@ function App() {
         RowCount: 0,
         Scale: 0,
         Disabled: {
-          RowLength: "disabled",
-          Scale: "disabled",
+          RowLength: true,
+          Scale: true,
         },
       };
       newRows.push(newRow);
@@ -79,8 +79,24 @@ function App() {
     setCount(newCount);
   };
 
+  type Rows = {
+    Id: number
+    Type:string
+    Label: string
+    APIName: string
+    Length: number
+    RowCount: number
+    Scale: number
+    Disabled: Disabled 
+  }
+
+  type Disabled = {
+    RowLength: boolean 
+    Scale: boolean 
+  }
+
   const onClickGenerate = () => {
-    let generatedText = [];
+    let generatedText: string[] = [];
     console.log(rowList);
     for (let row of rowList) {
       if (row.Type === "Text") {
@@ -127,7 +143,7 @@ function App() {
     fileDownload(blob, "fields.txt");
   };
 
-  const onClickDelete = (id) => {
+  const onClickDelete = (id: number) => {
     console.log(id);
     setRowList(
       rowList.filter((row) => {
@@ -136,7 +152,7 @@ function App() {
     );
   };
 
-  const onChangeType = (id, e) => {
+  const onChangeType = (id: number, e: React.ChangeEvent<HTMLSelectElement>) => {
     setRowList(
       rowList.map((row) => {
         if (row.Id === id) {
@@ -154,18 +170,18 @@ function App() {
       rowList.map((row) => {
         switch (row.Type) {
           case "Text":
-            row.Disabled.RowLength = "disabled";
-            row.Disabled.Scale = "disabled";
+            row.Disabled.RowLength = true;
+            row.Disabled.Scale = true;
             row.RowCount = 0;
             break;
           case "LongTextArea":
-            row.Disabled.RowLength = "";
-            row.Disabled.Scale = "disabled";
+            row.Disabled.RowLength = false; 
+            row.Disabled.Scale = true;
             row.RowCount = 0;
             break;
           case "Number":
-            row.Disabled.RowLength = "disabled";
-            row.Disabled.Scale = "";
+            row.Disabled.RowLength = true;
+            row.Disabled.Scale = false;
             break;
           default:
             console.log("そのデータ型は開発中です");
@@ -176,7 +192,7 @@ function App() {
     );
   };
 
-  const onChangeLabel = (id, e) => {
+  const onChangeLabel = (id: number, e: React.ChangeEvent<HTMLInputElement>) => {
     setRowList(
       rowList.map((row) => {
         if (row.Id === id) {
@@ -187,7 +203,7 @@ function App() {
     );
   };
 
-  const onChangeAPIName = (id, e) => {
+  const onChangeAPIName = (id: number, e: React.ChangeEvent<HTMLInputElement>) => {
     setRowList(
       rowList.map((row) => {
         if (row.Id === id) {
@@ -198,41 +214,41 @@ function App() {
     );
   };
 
-  const onChangeLength = (id, e) => {
+  const onChangeLength = (id: number, e: React.ChangeEvent<HTMLInputElement>) => {
     setRowList(
       rowList.map((row) => {
         if (row.Id === id) {
-          row.Length = e.target.value;
+          row.Length = parseInt(e.target.value);
         }
         return row;
       })
     );
   };
 
-  const onChangeRowCount = (id, e) => {
+  const onChangeRowCount = (id: number, e: React.ChangeEvent<HTMLInputElement>) => {
     setRowList(
       rowList.map((row) => {
         if (row.Id === id) {
-          row.RowCount = e.target.value;
+          row.RowCount = parseInt(e.target.value);
         }
         return row;
       })
     );
   };
 
-  const onChangeScale = (id, e) => {
+  const onChangeScale = (id: number, e: React.ChangeEvent<HTMLInputElement>) => {
     setRowList(
       rowList.map((row) => {
         if (row.Id === id) {
-          row.Scale = e.target.value;
+          row.Scale = parseInt(e.target.value);
         }
         return row;
       })
     );
   };
 
-  const onChangeAddNumber = (e) => {
-    setAddNumber(e.target.value);
+  const onChangeAddNumber = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setAddNumber(parseInt(e.target.value));
     console.log(addNumber);
   };
 
@@ -306,7 +322,7 @@ function App() {
                       onChange={(e) => onChangeLength(row.Id, e)}
                     />
                   </td>
-                  <td className={row.Disabled.RowLength}>
+                  <td className={row.Disabled.RowLength ? "disabled" : ""}>
                     <input
                       type="number"
                       min="0"
@@ -316,7 +332,7 @@ function App() {
                       onChange={(e) => onChangeRowCount(row.Id, e)}
                     />
                   </td>
-                  <td className={row.Disabled.Scale}>
+                  <td className={row.Disabled.Scale ? "disabled" : ""}>
                     <input
                       type="number"
                       min="0"
