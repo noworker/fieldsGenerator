@@ -1,0 +1,154 @@
+.container {
+  width: 90%;
+  margin: 0 auto;
+  max-width: 1000px;
+}
+
+.table-container {
+  width: 100%;
+  overflow-x: scroll;
+}
+
+h1,h2,h3,h4,h5,h6,p {
+  padding: 0;
+  margin: 0;
+}
+
+input {
+  font-size: 100%;
+  width: 95%;
+}
+
+input[type="text"] {
+  width: 95%;
+  white-space: normal;
+}
+
+select {
+  font-size: 100%;
+  width: 100%;
+}
+
+header {
+  background-color: greenyellow;
+  color: white;
+  font-size: 200%;
+  padding: 10px;
+}
+
+table, th, td{
+  margin: 20px;
+  border:1px solid black;
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+
+th {
+  background-color: skyblue;
+}
+
+td {
+  height: 25px;
+}
+
+.select {
+  border: none;
+  background-color: skyblue;
+  padding: 10px;
+  color: white;
+  font-weight: bold;
+}
+
+.no-border {
+  border: none;
+  background-color: transparent;
+}
+
+.no-border:focus {
+  outline: none;
+}
+
+.addButton {
+  width: 50px;
+  height: 50px;
+  background-color: green;
+  text-align: center;
+  line-height: 45px;
+  font-weight: bold;
+  font-size: 150%;
+  border-radius: 50%;
+  color: white;
+  font-size: 400%;
+  cursor: pointer;
+  user-select: none;
+}
+
+.generateButton {
+  background-color: blue;
+  border-radius: 5px;
+  text-align: center;
+  color: white;
+  width: 100px;
+  padding: 10px 0;
+  cursor: pointer;
+  user-select: none;
+}
+
+.generateButton:hover {
+  background-color: blueviolet;
+}
+
+.w-50px {
+  width: 50px;
+}
+
+.w-80px {
+  width: 80px;
+}
+
+.w-150px {
+  width: 150px;
+}
+
+.w-250px {
+  width: 250px;
+}
+
+.w-900px {
+  width: 900px
+}
+
+.disabled {
+  background-color: gray;
+}
+
+.delete-button {
+  background-color: red;
+  color: white;
+  border: none;
+  width: 100%;
+  height: 100%;
+  cursor: pointer;
+  user-select: none;
+}
+
+.flex-container {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  width: 100%;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.row-number {
+  width: 50px;
+  height: 50px;
+  font-size: 200%;
+  text-align: center;
+}
+
+.kakeru {
+  font-size: 200%;
+}
