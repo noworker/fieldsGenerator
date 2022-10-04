@@ -7,6 +7,8 @@
     "@types/node": "^18.7.18",
     "@types/react": "^18.0.20",
     "@types/react-dom": "^18.0.6",
+    "@types/xml2js": "^0.4.11",
+    "buffer": "^6.0.3",
     "i18next": "^21.9.2",
     "js-file-download": "^0.4.12",
     "react": "^18.2.0",
@@ -16,8 +18,13 @@
     "react-router-dom": "^6.4.1",
     "react-scripts": "5.0.1",
     "styled-components": "^5.3.5",
+    "timer": "^1.0.1",
+    "timers": "^0.1.1",
+    "uninstall": "^0.0.0",
     "usehooks-ts": "^2.7.2",
-    "web-vitals": "^2.1.4"
+    "web-vitals": "^2.1.4",
+    "xml-js": "^1.6.11",
+    "xml2js": "^0.4.23"
   },
   "scripts": {
     "start": "react-scripts start",
